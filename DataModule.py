@@ -33,7 +33,7 @@ class myDataset(CocoCaptions):
         print('Done')
     def __getitem__(self, index: int):
         try:
-            img, target= super().__getitem__(index)
+            _, target= super().__getitem__(index)
         except Exception as e:
             print(e)
             print('Error loading image:', index)
@@ -46,8 +46,8 @@ class myDataset(CocoCaptions):
                     truncation=True,
                     return_attention_mask = False,   # Construct attn. masks.
                     return_tensors = 'pt',     # Return pytorch tensors.
-                )['input_ids'] for sent in target[:5]],dim=0)
-        return img,target
+                )['input_ids'] for sent in target[:1]],dim=0)
+        return _,target
 
 
 # Dataset
