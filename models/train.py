@@ -105,6 +105,8 @@ class myLightningModule(LightningModule):
         input=batch[0]
         GroundTruth=self.encode_message(input)
         prediction=self.forward(input)
+        #normalize prediction to sum to one 
+        prediction=torch.nn.functional.softmax(prediction,dim=-1)
         loss=self.loss(prediction,GroundTruth)
         
         #Logging is done through this module as follows.
